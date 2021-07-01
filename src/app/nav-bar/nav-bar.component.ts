@@ -13,7 +13,7 @@ export class NavBarComponent implements OnInit {
   }
 
   navIconClicked(event): void {
-    
+    console.log(event);
   }
 
 }
