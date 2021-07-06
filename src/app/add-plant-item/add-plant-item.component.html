@@ -1,0 +1,26 @@
+<div id="overlay">
+    <div id="content">
+        <div>
+            <input type="text" [(ngModel)]="plant.name">
+            <input type="date" [(ngModel)]="plant.waterStartDate"> 
+            <input type="number" [(ngModel)]="plant.daysBtwnWatering"> 
+        </div>
+        <div id="display">
+            <span>Name: {{plant.name}}</span>
+            <span>Days Between Watering: {{plant.daysBtwnWatering}}</span>
+            <span>Started Watering: {{plant.waterStartDate}}</span>
+        </div>
+        <div id="uploader">
+            <input type="file" (change)="onFileChanged($event)">
+            <button (click)="onUploadClick()">Upload!</button>
+            <img #previewImg>
+            <button (click)="onShowClicked()">Show!</button>
+            <ng-container *ngIf="displayImage">
+                <span>image:</span>
+                <img #uploadImg>
+            </ng-container>
+        </div>
+        <button (click)="addToStore()">Add to Store</button>
+        <button (click)="printStore()">Print Store</button>
+    </div>
+</div>
