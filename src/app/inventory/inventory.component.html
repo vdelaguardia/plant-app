@@ -1,6 +1,11 @@
 <h1>YOUR PLANTS</h1>
-<ul>
-    <li>Miss Terry</li>
-    <li>Aloe Vera</li>
-    <li>Money Tree</li>
-</ul>
+<button (click)="modifyPlantModal()">Add Plant</button>
+<div id="plants-container">
+    <app-plant-item *ngFor="let plant of plants" [plant]="plant" (editClicked)="onEditClicked($event)" (deleteClicked)="onDeleteClicked($event)"></app-plant-item>
+</div>
+<span *ngIf="plants.length === 0">No plants added yet!</span>
+<add-plant-item *ngIf="showModifyPlantModal"
+    [plant]="selectedPlant"
+    (closeBtnClicked)="modifyPlantModal()"
+    (plantAdded)="onPlantAdded()">
+</add-plant-item>

@@ -12,6 +12,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RouterModule } from '@angular/router';
+import { DexieService } from './services/dexie.service';
+import { PlantService } from './services/plant.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,10 @@ import { RouterModule } from '@angular/router';
     ])
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [
+    DexieService,
+    PlantService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

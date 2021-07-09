@@ -1,1 +1,8 @@
-<p>plant-item works!</p>
+<div id="container">
+    <img id="plant-pic" aria-placeholder="Plant Picture">
+    <span>Name: {{plant.name}}</span>
+    <span>Water Every {{plant.daysBtwnWatering}}</span>
+    <span>Birthday: {{plant.waterStartDate | date: 'shortDate'}} Days</span>
+    <button (click)="onDeleteClicked()">Delete</button>
+    <button (click)="onEditClicked()">Edit</button>
+</div>

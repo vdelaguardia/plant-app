@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Plant } from '../models/plant.model';
+import { PlantService } from '../services/plant.service';
 
 @Component({
   selector: 'add-plant-item',
@@ -11,13 +12,17 @@ export class AddPlantItemComponent implements OnInit {
   @ViewChild("previewImg") previewImg;
   @ViewChild("uploadImg") uploadedPicture;
 
-  plant: Plant = new Plant();
+  @Output("closeBtnClicked") closeBtnClicked: EventEmitter<void> = new EventEmitter();
+  @Output("")
+  @Output("plantAdded") onPlantAdded: EventEmitter<void> = new EventEmitter();
+  
+  @Input() plant: Plant = new Plant();
   selectedFile: File;
   displayImage: boolean = false;
   previewPictureSrc: string | ArrayBuffer;
-  initialPlants: Plant[] = [{name: "PlantName", daysBtwnWatering: 9, pictureId: null, waterStartDate: new Date()}];
+  initialPlants: Plant[] = [];
 
-  constructor() { }
+  constructor( private plantSvc: PlantService ) { }
 
   ngOnInit(): void {
     const request = indexedDB.open("PlantDatabase", 3);
@@ -29,21 +34,6 @@ export class AddPlantItemComponent implements OnInit {
 
     request.onsuccess = (event: any) => {
       console.log("Successfully opened database");
-      const database = request.result;
-      // const objectStore = database.createObjectStore("plants", { keyPath: "plantId", autoIncrement: true });
-      // console.log("created objstore" + objectStore);
-      // objectStore.transaction.oncomplete = (event) => {
-      //   const plantObjStore = database.transaction("plants", "readwrite").objectStore("plants");
-      //   this.initialPlants.forEach( plant => {
-      //     plantObjStore.add(plant);
-      //     console.log("Added: " + plant);
-      //   });
-      // }
- 
-      // database.onerror = (event: any) => {
-      //   console.error("Database error: " + event.target.errorCode);
-      //   console.error(event);
-      // }
     }
 
     request.onupgradeneeded = (event: any) => {
@@ -111,18 +101,23 @@ export class AddPlantItemComponent implements OnInit {
   }
 
   addToStore() {
-    const request = indexedDB.open("PlantDatabase");
-      let database;
-      request.onsuccess = (event) => {
-        database = request.result;
-        const transaction = database.transaction("plants", "readwrite");
-        this.handleTransactionCompleteAndError(transaction);
-        const objectStore = transaction.objectStore("plants");
-        const addRequest = objectStore.add(this.plant);
-        addRequest.onsuccess = (event) => {
-          console.log("Added: " + event.target);
-        } 
-      }
+    // const request = indexedDB.open("PlantDatabase");
+    // let database;
+    // request.onsuccess = (event) => {
+    //   database = request.result;
+    //   const transaction = database.transaction("plants", "readwrite");
+    //   this.handleTransactionCompleteAndError(transaction);
+    //   const objectStore = transaction.objectStore("plants");
+    //   const addRequest = objectStore.add(this.plant);
+    //   addRequest.onsuccess = (event) => {
+    //     console.log("Added: " + event.target);
+    //     this.onPlantAdded.emit();
+    //   }
+    // }
+    this.plantSvc.add(this.plant)
+      .then( id => {
+        console.log("Added plant with id: " + id);
+    });
   }
 
   printStore() {
@@ -146,6 +141,11 @@ export class AddPlantItemComponent implements OnInit {
     transaction.oncomplete = (event) => {
       console.log("Transaction Complete! " + event);
     }
+  }
+
+  onCloseClicked(): void {
+    this.plant = new Plant();
+    this.closeBtnClicked.emit();
   }
 
 }

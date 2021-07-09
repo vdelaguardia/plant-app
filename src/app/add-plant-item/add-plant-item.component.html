@@ -1,9 +1,10 @@
 <div id="overlay">
     <div id="content">
+        <button (click)="onCloseClicked()">Close</button>
         <div>
-            <input type="text" [(ngModel)]="plant.name">
+            <input type="text" placeholder="Name" [(ngModel)]="plant.name">
             <input type="date" [(ngModel)]="plant.waterStartDate"> 
-            <input type="number" [(ngModel)]="plant.daysBtwnWatering"> 
+            <input type="number" placeholder="Number of days between watering" [(ngModel)]="plant.daysBtwnWatering"> 
         </div>
         <div id="display">
             <span>Name: {{plant.name}}</span>
