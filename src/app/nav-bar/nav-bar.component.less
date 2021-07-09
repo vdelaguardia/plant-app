@@ -1,21 +1,56 @@
 .wrapper {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     background-color: #95E189;
     overflow: hidden;
     position: fixed;
-    bottom: 0;
+    float: left;
+    margin-top: -21px;
     min-height: 60px;
     max-height: 100px;
 
     mat-icon {
-        padding: 5px 30px;
         font-size: 50px;
         text-align: center;
+        color: white;
     }
 
     mat-icon:hover {
         cursor: pointer;
+    }
+
+    mat-icon:focus {
+        color: darkgreen;
+    }
+
+    mat-icon:focus {
+        color: darkgreen;
+    }
+
+    .nav-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 5px 30px;
+
+        .nav-item-title {
+            font-size: 30px;
+            padding-left: 10px;
+            padding-right: 25px;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .wrapper {
+        position: fixed;
+        bottom: 0;
+        min-height: 60px;
+        max-height: 100px;
+    }
+
+    .nav-item-title {
+        display: none;
     }
 }

@@ -1,5 +1,14 @@
 <div class="wrapper">
-    <mat-icon aria-hidden="false" aria-label="inventory" [ngStyle]="{'color':'white'}" [inline]="true" routerLink="/inventory">yard</mat-icon>
-    <mat-icon aria-hidden="false" aria-label="home" [ngStyle]="{'color':'white'}" [inline]="true" routerLink="/home">home</mat-icon>
-    <mat-icon aria-hidden="false" aria-label="calendar" [ngStyle]="{'color':'white'}" [inline]="true" routerLink="/calendar">date_range</mat-icon>
+    <div class="nav-item">
+        <mat-icon aria-hidden="false" aria-label="inventory" [inline]="true" routerLink="/inventory">yard</mat-icon>
+        <span class="nav-item-title">Inventory</span>
+    </div>
+    <div class="nav-item">
+        <mat-icon aria-hidden="false" aria-label="home" [inline]="true" routerLink="/home">home</mat-icon>
+        <span class="nav-item-title">Home</span>
+    </div>
+    <div class="nav-item">
+        <mat-icon aria-hidden="false" aria-label="calendar" [inline]="true" routerLink="/calendar">date_range</mat-icon>
+        <span class="nav-item-title">Calendar</span>
+    </div>
 </div>
