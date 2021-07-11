@@ -33,15 +33,23 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  onPlantAdded(plant: Plant): void {
+  onPlantSaved(plant: Plant): void {
+    if (this.plants.find(p => p.plantId == plant.plantId)) {
+      this.addPlant(plant);
+    } else {
+      this.modifyPlant(plant);
+    }
+    this.toggleModifyPlantModal();
+  }
+
+  addPlant(plant: Plant): void {
     this.plantSvc.add(plant).then(id => {
       this.plants = [...this.plants, Object.assign({}, plant, { id })];
       console.log("Added plant with id: " + id);
     });
-    this.toggleModifyPlantModal();
   }
 
-  onPlantModified(plant: Plant): void {
+  modifyPlant(plant: Plant): void {
     this.plantSvc.update(plant.plantId, plant).then(id => {
       this.plants = this.plants.filter(plant => plant.plantId !== id);
       this.plants = [...this.plants, Object.assign({}, plant, { id })];

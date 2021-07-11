@@ -14,7 +14,7 @@ export class AddPlantItemComponent implements OnInit {
 
   @Output("closeBtnClicked") closeBtnClicked: EventEmitter<void> = new EventEmitter();
   @Output("")
-  @Output("plantAdded") onPlantAdded: EventEmitter<Plant> = new EventEmitter();
+  @Output("plantAdded") onSave: EventEmitter<Plant> = new EventEmitter();
   
   @Input() plant: Plant = new Plant();
   selectedFile: File;
@@ -72,25 +72,8 @@ export class AddPlantItemComponent implements OnInit {
     return this.uploadedPicture.src;
   }
 
-  addToStore() {
-    // const request = indexedDB.open("PlantDatabase");
-    // let database;
-    // request.onsuccess = (event) => {
-    //   database = request.result;
-    //   const transaction = database.transaction("plants", "readwrite");
-    //   this.handleTransactionCompleteAndError(transaction);
-    //   const objectStore = transaction.objectStore("plants");
-    //   const addRequest = objectStore.add(this.plant);
-    //   addRequest.onsuccess = (event) => {
-    //     console.log("Added: " + event.target);
-    //     this.onPlantAdded.emit();
-    //   }
-    // }
-    // this.plantSvc.add(this.plant)
-    //   .then( id => {
-
-    // });
-    this.onPlantAdded.emit(this.plant);
+  save() {
+    this.onSave.emit(this.plant);
   }
 
   printStore() {

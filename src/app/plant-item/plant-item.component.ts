@@ -12,14 +12,14 @@ export class PlantItemComponent implements OnInit {
   @Input("plant") plant: Plant;
 
   @Output("editClicked") editClicked: EventEmitter<Plant> = new EventEmitter(); 
-  @Output("deleteClicked") deleteClicked: EventEmitter<Plant> = new EventEmitter(); 
+  @Output("deleteClicked") deleteClicked: EventEmitter<number> = new EventEmitter(); 
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onDeleteClicked() {
-    this.deleteClicked.emit(this.plant);
+    this.deleteClicked.emit(this.plant.plantId);
   }
 
   onEditClicked() {
