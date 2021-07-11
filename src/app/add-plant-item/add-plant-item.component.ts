@@ -31,21 +31,14 @@ export class AddPlantItemComponent implements OnInit {
     const reader = new FileReader();
 
     reader.addEventListener("load", () => {
-      this.previewPictureSrc = reader.result;
-      this.previewImg.nativeElement.src = reader.result.toString();
+      // this.previewPictureSrc = reader.result;
+      // this.previewImg.nativeElement.src = reader.result.toString();
+      this.plant.pictureId = reader.result.toString();
     });
 
     reader.readAsDataURL(this.selectedFile);
-    this.plant.pictureId = this.getBase64Image(this.previewImg.nativeElement);
-  }
-
-  onUploadClick() {
-    try {
-      
-    }
-    catch(e) {
-      console.log("Error: " + e);
-    }
+    //this.plant.pictureId = this.selectedFile;
+    //this.plant.pictureId = this.getBase64Image(this.previewImg.nativeElement);
   }
 
   private getBase64Image(img): string {
@@ -60,42 +53,12 @@ export class AddPlantItemComponent implements OnInit {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
-  onShowClicked() {
-    const newImg = new Image();
-    newImg.src = localStorage.getItem('picture');
-    this.uploadedPicture = newImg;
-    this.displayImage = !this.displayImage;
-  }
-
   get imgSrc() {
     return this.uploadedPicture.src;
   }
 
   onSave() {
     this.save.emit(this.plant);
-  }
-
-  printStore() {
-    const request = indexedDB.open("PlantDatabase");
-    let database;
-    request.onsuccess = (event) => {
-      database = request.result;
-      const transaction = database.transaction("plants", "readonly");
-      this.handleTransactionCompleteAndError(transaction);
-      const objectStore = transaction.objectStore("plants");
-      const getRequest = objectStore.get(1);
-      console.log("Retrieved Object:");
-      console.dir(getRequest);
-    }
-  }
-
-  private handleTransactionCompleteAndError(transaction: IDBTransaction) {
-    transaction.onerror = (event) => {
-      console.error("Transaction error: " + event);
-    }
-    transaction.oncomplete = (event) => {
-      console.log("Transaction Complete! " + event);
-    }
   }
 
   onCloseClicked(): void {

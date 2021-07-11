@@ -1,8 +1,13 @@
 <div id="container">
-    <img id="plant-pic" aria-placeholder="Plant Picture">
-    <span>Name: {{plant.name}}</span>
-    <span>Water Every {{plant.daysBtwnWatering}}</span>
-    <span>Birthday: {{plant.waterStartDate | date: 'shortDate'}} Days</span>
-    <button (click)="onDeleteClicked()">Delete</button>
-    <button (click)="onEditClicked()">Edit</button>
+    <div id="img-container">
+        <img id="plant-pic" aria-placeholder="Plant Picture" [src]="plant.pictureId">
+    </div>
+    <div>
+        <span>Name: {{plant.name}}</span>
+        <span>Water Every {{plant.daysBtwnWatering}}</span>
+        <span>Birthday: {{plant.waterStartDate | date: 'shortDate'}} Days</span>
+        <button (click)="onDeleteClicked()">Delete</button>
+        <button (click)="onEditClicked()">Edit</button>
+    </div>
+
 </div>

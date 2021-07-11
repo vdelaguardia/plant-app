@@ -1,26 +1,23 @@
 <div id="overlay">
-    <div id="content">
-        <button (click)="onCloseClicked()">Close</button>
-        <div>
-            <input type="text" placeholder="Name" [(ngModel)]="plant.name">
-            <input type="date" [(ngModel)]="plant.waterStartDate"> 
-            <input type="number" placeholder="Number of days between watering" [(ngModel)]="plant.daysBtwnWatering"> 
-        </div>
-        <div id="display">
-            <span>Name: {{plant.name}}</span>
-            <span>Days Between Watering: {{plant.daysBtwnWatering}}</span>
-            <span>Started Watering: {{plant.waterStartDate}}</span>
-        </div>
-        <div id="uploader">
+    <div id="inner-container">
+        <div id="uploader-content">
+            <img #previewImg id="preview-img" [src]="plant.pictureId">
             <input type="file" (change)="onFileChanged($event)">
-            <button (click)="onUploadClick()">Upload!</button>
-            <img #previewImg>
-            <button (click)="onShowClicked()">Show!</button>
-            <ng-container *ngIf="displayImage">
-                <span>image:</span>
-                <img #uploadImg>
-            </ng-container>
         </div>
-        <button (click)="onSave()">Save</button>
+        <div id="content">
+            <button (click)="onCloseClicked()">Close</button>
+            <div>
+                <input type="text" placeholder="Name" [(ngModel)]="plant.name">
+                <input type="date" [(ngModel)]="plant.waterStartDate"> 
+                <input type="number" placeholder="Number of days between watering" [(ngModel)]="plant.daysBtwnWatering"> 
+            </div>
+            <div id="display">
+                <span>Name: {{plant.name}}</span>
+                <span>Days Between Watering: {{plant.daysBtwnWatering}}</span>
+                <span>Started Watering: {{plant.waterStartDate}}</span>
+            </div>
+    
+            <button (click)="onSave()">Save</button>
+        </div>
     </div>
 </div>
