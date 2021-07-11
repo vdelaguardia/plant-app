@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plant } from '../models/plant.model';
+import { PlantService } from '../services/plant.service';
 
 @Component({
   selector: 'app-inventory',
@@ -12,36 +13,36 @@ export class InventoryComponent implements OnInit {
   showModifyPlantModal: boolean = false;
   selectedPlant: Plant = new Plant();
 
-  constructor() { }
+  constructor(private plantSvc: PlantService) { }
 
   ngOnInit(): void {
     this.refreshPlants();
   }
 
   refreshPlants(): void {
-    const request = indexedDB.open("PlantDatabase", 3);
-    request.onerror = (event) => {
-      console.error("Error opening db: ");
-      console.dir(event);
-    }
-    request.onsuccess = (event) => {
-      console.log("Success opening db!");
-      const db = request.result;
-      const objStore = db.transaction("plants").objectStore("plants");
-      console.log(objStore);
-      this.plants = [];
-      objStore.openCursor().onsuccess = (event: any) => {
-        const cursor = event.target.result;
-        if (cursor) {
-          console.log(cursor.value);
-          this.plants = [...this.plants, cursor.value];
-          cursor.continue();
-        } else {
-          console.log("No more entries.");
-        }
-        console.log(this.plants);
-      }
-    }
+    // const request = indexedDB.open("PlantDatabase", 3);
+    // request.onerror = (event) => {
+    //   console.error("Error opening db: ");
+    //   console.dir(event);
+    // }
+    // request.onsuccess = (event) => {
+    //   console.log("Success opening db!");
+    //   const db = request.result;
+    //   const objStore = db.transaction("plants").objectStore("plants");
+    //   console.log(objStore);
+    //   this.plants = [];
+    //   objStore.openCursor().onsuccess = (event: any) => {
+    //     const cursor = event.target.result;
+    //     if (cursor) {
+    //       console.log(cursor.value);
+    //       this.plants = [...this.plants, cursor.value];
+    //       cursor.continue();
+    //     } else {
+    //       console.log("No more entries.");
+    //     }
+    //     console.log(this.plants);
+    //   }
+    // }
   }
 
   modifyPlantModal(): void {
@@ -73,7 +74,11 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  onPlantAdded(): void {
+  onPlantAdded(plant: Plant): void {
+    this.plantSvc.add(plant).then(id => {
+      this.plants = [...this.plants, Object.assign({}, plant, { id })];
+      console.log("Added plant with id: " + id);
+    })
     this.refreshPlants();
     this.modifyPlantModal();
   }

@@ -12,8 +12,9 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RouterModule } from '@angular/router';
-import { DexieService } from './services/dexie.service';
+import { DexieService } from './core/dexie.service';
 import { PlantService } from './services/plant.service';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PlantService } from './services/plant.service';
     BrowserAnimationsModule,
     MatIconModule,
     FormsModule,
+    CoreModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'inventory', component: InventoryComponent },
@@ -38,7 +40,6 @@ import { PlantService } from './services/plant.service';
   ],
   exports: [RouterModule],
   providers: [
-    DexieService,
     PlantService
   ],
   bootstrap: [AppComponent]

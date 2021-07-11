@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Plant } from "../models/plant.model";
-import { DexieService } from "./dexie.service";
+import { DexieService } from "../core/dexie.service";
 
 @Injectable()
 export class PlantService {

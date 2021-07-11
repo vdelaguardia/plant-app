@@ -7,5 +7,5 @@
 <add-plant-item *ngIf="showModifyPlantModal"
     [plant]="selectedPlant"
     (closeBtnClicked)="modifyPlantModal()"
-    (plantAdded)="onPlantAdded()">
+    (plantAdded)="onPlantAdded($event)">
 </add-plant-item>

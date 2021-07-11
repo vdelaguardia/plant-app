@@ -14,7 +14,7 @@ export class AddPlantItemComponent implements OnInit {
 
   @Output("closeBtnClicked") closeBtnClicked: EventEmitter<void> = new EventEmitter();
   @Output("")
-  @Output("plantAdded") onPlantAdded: EventEmitter<void> = new EventEmitter();
+  @Output("plantAdded") onPlantAdded: EventEmitter<Plant> = new EventEmitter();
   
   @Input() plant: Plant = new Plant();
   selectedFile: File;
@@ -25,34 +25,6 @@ export class AddPlantItemComponent implements OnInit {
   constructor( private plantSvc: PlantService ) { }
 
   ngOnInit(): void {
-    const request = indexedDB.open("PlantDatabase", 3);
-
-    request.onerror = (event: any) => {
-      console.error("IndexedDB was not given permission.");
-      console.error(event);
-    }
-
-    request.onsuccess = (event: any) => {
-      console.log("Successfully opened database");
-    }
-
-    request.onupgradeneeded = (event: any) => {
-      console.log("Upgrade database");
-      const database = request.result;
-      const objectStore = database.createObjectStore("plants", { keyPath: "plantId", autoIncrement: true });
-      objectStore.transaction.oncomplete = (event) => {
-        const plantObjStore = database.transaction("plants", "readwrite").objectStore("plants");
-        this.initialPlants.forEach( plant => {
-          plantObjStore.add(plant);
-        });
-      }
- 
-      database.onerror = (event: any) => {
-        console.error("Database error: " + event.target.errorCode);
-        console.error(event);
-      }
-      
-    }
   }
 
   onFileChanged(event: any) {
@@ -114,10 +86,11 @@ export class AddPlantItemComponent implements OnInit {
     //     this.onPlantAdded.emit();
     //   }
     // }
-    this.plantSvc.add(this.plant)
-      .then( id => {
-        console.log("Added plant with id: " + id);
-    });
+    // this.plantSvc.add(this.plant)
+    //   .then( id => {
+
+    // });
+    this.onPlantAdded.emit(this.plant);
   }
 
   printStore() {
