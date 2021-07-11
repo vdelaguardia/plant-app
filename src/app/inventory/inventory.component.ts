@@ -16,76 +16,43 @@ export class InventoryComponent implements OnInit {
   constructor(private plantSvc: PlantService) { }
 
   ngOnInit(): void {
-    this.refreshPlants();
+    this.plantSvc.getAll().then((plants) => {
+      console.log("Obtained all plants");
+      this.plants = plants;
+    })
   }
 
-  refreshPlants(): void {
-    // const request = indexedDB.open("PlantDatabase", 3);
-    // request.onerror = (event) => {
-    //   console.error("Error opening db: ");
-    //   console.dir(event);
-    // }
-    // request.onsuccess = (event) => {
-    //   console.log("Success opening db!");
-    //   const db = request.result;
-    //   const objStore = db.transaction("plants").objectStore("plants");
-    //   console.log(objStore);
-    //   this.plants = [];
-    //   objStore.openCursor().onsuccess = (event: any) => {
-    //     const cursor = event.target.result;
-    //     if (cursor) {
-    //       console.log(cursor.value);
-    //       this.plants = [...this.plants, cursor.value];
-    //       cursor.continue();
-    //     } else {
-    //       console.log("No more entries.");
-    //     }
-    //     console.log(this.plants);
-    //   }
-    // }
-  }
-
-  modifyPlantModal(): void {
+  toggleModifyPlantModal(): void {
     this.showModifyPlantModal = !this.showModifyPlantModal;
   }
 
   onDeleteClicked(id: number): void {
-    const request = indexedDB.open("PlantDatabase", 3);
-    request.onerror = (event) => {
-      console.error("Error opening db: ");
-      console.dir(event);
-    }
-    request.onsuccess = (event) => {
-      console.log("Success opening db!");
-      const db = request.result;
-      const objStore = db.transaction("plants", "readwrite").objectStore("plants");
-      const plantRequest = objStore.delete(id);
-      // const plantRequest = objStore.getAll();
-      plantRequest.onsuccess = (event: any) => {
-        const plant = plantRequest.result;
-        console.log("Deleted: ");
-        console.log(plant);
-        this.refreshPlants();
-      }
-      plantRequest.onerror = (event: any) => {
-        console.error("Error getting plant");
-        console.log(event);
-      }
-    }
+    this.plantSvc.remove(id).then(() => {
+      this.plants = this.plants.filter(plant => plant.plantId !== id);
+      console.log("Removed plant with id: " + id);
+    });
   }
 
   onPlantAdded(plant: Plant): void {
     this.plantSvc.add(plant).then(id => {
       this.plants = [...this.plants, Object.assign({}, plant, { id })];
       console.log("Added plant with id: " + id);
-    })
-    this.refreshPlants();
-    this.modifyPlantModal();
+    });
+    this.toggleModifyPlantModal();
+  }
+
+  onPlantModified(plant: Plant): void {
+    this.plantSvc.update(plant.plantId, plant).then(id => {
+      this.plants = this.plants.filter(plant => plant.plantId !== id);
+      this.plants = [...this.plants, Object.assign({}, plant, { id })];
+      console.log("Modified plant with id: " + id);
+    });
+    this.toggleModifyPlantModal();
   }
 
   onEditClicked(plant: Plant): void {
     this.selectedPlant = plant;
-    this.modifyPlantModal();
+    this.toggleModifyPlantModal();
   }
 
 }

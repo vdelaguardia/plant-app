@@ -1,5 +1,5 @@
 <h1>YOUR PLANTS</h1>
-<button (click)="modifyPlantModal()">Add Plant</button>
+<button (click)="toggleModifyPlantModal()">Add Plant</button>
 <div id="plants-container">
     <app-plant-item *ngFor="let plant of plants" [plant]="plant" (editClicked)="onEditClicked($event)" (deleteClicked)="onDeleteClicked($event)"></app-plant-item>
 </div>
