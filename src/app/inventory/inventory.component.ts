@@ -35,9 +35,9 @@ export class InventoryComponent implements OnInit {
 
   onPlantSaved(plant: Plant): void {
     if (this.plants.find(p => p.plantId == plant.plantId)) {
-      this.addPlant(plant);
-    } else {
       this.modifyPlant(plant);
+    } else {
+      this.addPlant(plant);
     }
     this.toggleModifyPlantModal();
   }

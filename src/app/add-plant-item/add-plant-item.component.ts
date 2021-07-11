@@ -13,8 +13,7 @@ export class AddPlantItemComponent implements OnInit {
   @ViewChild("uploadImg") uploadedPicture;
 
   @Output("closeBtnClicked") closeBtnClicked: EventEmitter<void> = new EventEmitter();
-  @Output("")
-  @Output("plantAdded") onSave: EventEmitter<Plant> = new EventEmitter();
+  @Output("save") save: EventEmitter<Plant> = new EventEmitter();
   
   @Input() plant: Plant = new Plant();
   selectedFile: File;
@@ -22,7 +21,7 @@ export class AddPlantItemComponent implements OnInit {
   previewPictureSrc: string | ArrayBuffer;
   initialPlants: Plant[] = [];
 
-  constructor( private plantSvc: PlantService ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -72,8 +71,8 @@ export class AddPlantItemComponent implements OnInit {
     return this.uploadedPicture.src;
   }
 
-  save() {
-    this.onSave.emit(this.plant);
+  onSave() {
+    this.save.emit(this.plant);
   }
 
   printStore() {

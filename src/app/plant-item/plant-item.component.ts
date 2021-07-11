@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Plant } from '../models/plant.model';
-import { PlantService } from '../services/plant.service';
 
 @Component({
   selector: 'app-plant-item',
