@@ -33,8 +33,9 @@ export class InventoryComponent implements OnInit {
     });
   }
 
+  // If the incoming plant has an id already, modify it; otherwise, create a new plant
   onPlantSaved(plant: Plant): void {
-    if (this.plants.find(p => p.plantId == plant.plantId)) {
+    if (!!plant.plantId) {
       this.modifyPlant(plant);
     } else {
       this.addPlant(plant);
@@ -46,6 +47,7 @@ export class InventoryComponent implements OnInit {
     this.plantSvc.add(plant).then(id => {
       this.plants = [...this.plants, Object.assign({}, plant, { id })];
       console.log("Added plant with id: " + id);
+      this.selectedPlant = new Plant();
     });
   }
 

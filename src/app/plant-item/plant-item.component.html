@@ -4,10 +4,12 @@
     </div>
     <div>
         <span>Name: {{plant.name}}</span>
-        <span>Water Every {{plant.daysBtwnWatering}}</span>
-        <span>Birthday: {{plant.waterStartDate | date: 'shortDate'}} Days</span>
-        <button (click)="onDeleteClicked()">Delete</button>
-        <button (click)="onEditClicked()">Edit</button>
+        <span>Water Every {{plant.daysBtwnWatering}} Days</span>
+        <span>Birthday: {{plant.waterStartDate | date: 'shortDate'}} </span>
+        <div>
+            <button mat-raised-button color="warn" (click)="onDeleteClicked()">Delete</button>
+            <button mat-raised-button (click)="onEditClicked()">Edit</button>
+        </div>
     </div>
 
 </div>

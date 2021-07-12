@@ -1,17 +1,19 @@
-<div id="overlay">
-    <div id="inner-container">
-        <div id="uploader-content">
+<div id="overlay" (click)="onCloseClicked()"></div>
+
+<div id="inner-container">
+    <div class="flex-container" id="content">
+        <div class="flex-container" id="uploader-content">
             <img #previewImg id="preview-img" [src]="plant.pictureId">
             <input type="file" (change)="onFileChanged($event)">
         </div>
-        <div id="content">
+        <div class="flex-container" id="edit-content">
             <button (click)="onCloseClicked()">Close</button>
             <div>
                 <input type="text" placeholder="Name" [(ngModel)]="plant.name">
                 <input type="date" [(ngModel)]="plant.waterStartDate"> 
                 <input type="number" placeholder="Number of days between watering" [(ngModel)]="plant.daysBtwnWatering"> 
             </div>
-            <div id="display">
+            <div class="flex-container" id="display">
                 <span>Name: {{plant.name}}</span>
                 <span>Days Between Watering: {{plant.daysBtwnWatering}}</span>
                 <span>Started Watering: {{plant.waterStartDate}}</span>
