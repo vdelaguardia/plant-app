@@ -1,0 +1,15 @@
+<div id="container">
+    <div id="img-container">
+        <img id="plant-pic" aria-placeholder="Plant Picture" [src]="plant.pictureId">
+    </div>
+    <div>
+        <span>Name: {{plant.name}}</span>
+        <span>Water Every {{plant.daysBtwnWatering}} Days</span>
+        <span>Birthday: {{plant.waterStartDate | date: 'shortDate'}} </span>
+        <div>
+            <button mat-raised-button color="warn" (click)="onDeleteClicked()">Delete</button>
+            <button mat-raised-button (click)="onEditClicked()">Edit</button>
+        </div>
+    </div>
+
+</div>
