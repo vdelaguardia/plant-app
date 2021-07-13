@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { PlantService } from './services/plant.service';
 import { CoreModule } from './core/core.module';
 import { MatButtonModule } from '@angular/material/button';
+import { SimpleProfileComponent } from './simple-profile/simple-profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
     AddPlantItemComponent,
     InventoryComponent,
     HomeComponent,
-    CalendarComponent
+    CalendarComponent,
+    SimpleProfileComponent
   ],
   imports: [
     BrowserModule,
