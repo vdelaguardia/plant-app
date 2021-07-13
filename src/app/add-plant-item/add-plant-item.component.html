@@ -10,13 +10,13 @@
             <button (click)="onCloseClicked()">Close</button>
             <div>
                 <input type="text" placeholder="Name" [(ngModel)]="plant.name">
-                <input type="date" [(ngModel)]="plant.waterStartDate"> 
+                <input type="date" [(ngModel)]="plant.lastWateredDate"> 
                 <input type="number" placeholder="Number of days between watering" [(ngModel)]="plant.daysBtwnWatering"> 
             </div>
             <div class="flex-container" id="display">
                 <span>Name: {{plant.name}}</span>
                 <span>Days Between Watering: {{plant.daysBtwnWatering}}</span>
-                <span>Started Watering: {{plant.waterStartDate}}</span>
+                <span>Last Watered: {{plant.lastWateredDate}}</span>
             </div>
     
             <button (click)="onSave()">Save</button>

@@ -4,7 +4,7 @@ export class DexieService extends Dexie {
   constructor() {
     super('PlantDatabase');
     this.version(6).stores({
-      plants: '++plantId, pictureId, waterStartDate, daysBtwnWatering',
+      plants: '++plantId, pictureId, lastWateredDate, daysBtwnWatering',
     });
   }
 }

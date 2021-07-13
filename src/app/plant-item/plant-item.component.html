@@ -5,7 +5,7 @@
     <div>
         <span>Name: {{plant.name}}</span>
         <span>Water Every {{plant.daysBtwnWatering}} Days</span>
-        <span>Birthday: {{plant.waterStartDate | date: 'shortDate'}} </span>
+        <span>Last Watered: {{plant.lastWateredDate | date: 'shortDate'}} Days</span>
         <div>
             <button mat-raised-button color="warn" (click)="onDeleteClicked()">Delete</button>
             <button mat-raised-button (click)="onEditClicked()">Edit</button>

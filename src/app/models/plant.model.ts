@@ -2,6 +2,6 @@ export class Plant {
     plantId: number;
     pictureId: string;
     name: string;
-    waterStartDate: Date;
+    lastWateredDate: string;
     daysBtwnWatering: number;
 }

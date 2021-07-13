@@ -33,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     CoreModule,
     RouterModule.forRoot([
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'inventory', component: InventoryComponent },
       { path: 'calendar', component: CalendarComponent },
