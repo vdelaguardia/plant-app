@@ -14,9 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private plantSvc: PlantService) { }
 
   ngOnInit(): void {
-    this.plantSvc.getAll().then((plants) => {
-      this.plants = this.getPlantsThatNeedWater(plants);
-    });
+    this.plantSvc.getAll().then((plants) => this.plants = this.getPlantsThatNeedWater(plants));
   }
 
   getPlantsThatNeedWater(plants: Array<Plant>): Array<Plant> {
@@ -25,6 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   onPlantWatered(plant: Plant): void {
-    plant.lastWateredDate = new Date().toDateString();
+    this.plantSvc.update(plant.plantId, { lastWateredDate: new Date().toDateString() });
+    this.plantSvc.getAll().then((plants) => this.plants = this.getPlantsThatNeedWater(plants));
   }
 }
