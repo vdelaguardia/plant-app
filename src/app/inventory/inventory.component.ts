@@ -33,14 +33,19 @@ export class InventoryComponent implements OnInit {
     });
   }
 
+  onCloseClicked(): void {
+    this.selectedPlant = new Plant();
+    this.showModifyPlantModal = false;
+  }
+
   // If the incoming plant has an id already, modify it; otherwise, create a new plant
   onPlantSaved(plant: Plant): void {
     if (!!plant.plantId) {
-      this.modifyPlant(plant);
+      this.modifyPlant(plant, plant.plantId);
     } else {
       this.addPlant(plant);
     }
-    this.toggleModifyPlantModal();
+    this.showModifyPlantModal = false;
   }
 
   addPlant(plant: Plant): void {
@@ -51,13 +56,13 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  modifyPlant(plant: Plant): void {
-    this.plantSvc.update(plant.plantId, plant).then(id => {
-      this.plants = this.plants.filter(plant => plant.plantId !== id);
+  modifyPlant(plant: Plant, id: number): void {
+    this.plantSvc.update(id, plant).then(() => {
+      this.plants = this.plants.filter(p => p.plantId !== id);
       this.plants = [...this.plants, Object.assign({}, plant, { id })];
       console.log("Modified plant with id: " + id);
     });
-    this.toggleModifyPlantModal();
+    this.showModifyPlantModal = false;
   }
 
   onEditClicked(plant: Plant): void {

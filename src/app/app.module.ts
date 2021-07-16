@@ -16,6 +16,7 @@ import { PlantService } from './services/plant.service';
 import { CoreModule } from './core/core.module';
 import { MatButtonModule } from '@angular/material/button';
 import { SimpleProfileComponent } from './simple-profile/simple-profile.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SimpleProfileComponent } from './simple-profile/simple-profile.componen
       { path: 'inventory', component: InventoryComponent },
       { path: 'calendar', component: CalendarComponent },
     ]),
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule
   ],
   exports: [RouterModule],
   providers: [

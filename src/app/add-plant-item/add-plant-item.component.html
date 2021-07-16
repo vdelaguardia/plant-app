@@ -1,25 +1,37 @@
 <div id="overlay" (click)="onCloseClicked()"></div>
 
 <div id="inner-container">
-    <div class="flex-container" id="content">
-        <div class="flex-container" id="uploader-content">
-            <img #previewImg id="preview-img" [src]="plant.pictureId">
-            <input type="file" (change)="onFileChanged($event)">
+    <div class="centered-container" id="content">
+        <div class="centered-container" id="uploader-content">
+            <mat-icon id="florist-icon" *ngIf="!plant.pictureId">local_florist</mat-icon>
+            <img *ngIf="!!plant.pictureId" #previewImg id="preview-img" [src]="plant.pictureId">
+            <mat-label for="file-picker">
+                <span>Upload Picture</span>
+                <input type="file" id="file-picker" (change)="onFileChanged($event)">
+            </mat-label>
         </div>
-        <div class="flex-container" id="edit-content">
-            <button (click)="onCloseClicked()">Close</button>
-            <div>
-                <input type="text" placeholder="Name" [(ngModel)]="plant.name">
-                <input type="date" [(ngModel)]="plant.lastWateredDate"> 
-                <input type="number" placeholder="Number of days between watering" [(ngModel)]="plant.daysBtwnWatering"> 
-            </div>
-            <div class="flex-container" id="display">
-                <span>Name: {{plant.name}}</span>
-                <span>Days Between Watering: {{plant.daysBtwnWatering}}</span>
-                <span>Last Watered: {{plant.lastWateredDate}}</span>
-            </div>
-    
-            <button (click)="onSave()">Save</button>
+        <div class="centered-container" id="edit-content">
+            <form class="centered-container" id="form">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" name="name" [(ngModel)]="plant.name">
+                    <button *ngIf="plant.name" matSuffix mat-icon-button aria-label="Clear" (click)="plant.name=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Last watered date</mat-label>
+                    <input matInput type="date" name="wateredDate" [(ngModel)]="plant.lastWateredDate">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Days between watering</mat-label>
+                    <input matInput type="number" name="daysBtwn" [(ngModel)]="plant.daysBtwnWatering">
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="centered-container" id="buttons">
+            <button mat-raised-button color="accent" (click)="onSave()">Save</button>
+            <button mat-raised-button (click)="onCloseClicked()">Close</button>
         </div>
     </div>
 </div>
