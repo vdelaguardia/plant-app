@@ -40,11 +40,9 @@ export class AddPlantItemComponent implements OnInit {
 
   onSave() {
     this.save.emit(this.plant);
-    this.plant = new Plant();
   }
 
   onCloseClicked(): void {
-    this.plant = new Plant();
     this.closeBtnClicked.emit();
   }
 

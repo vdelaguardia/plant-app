@@ -8,6 +8,6 @@
 <span *ngIf="plants.length === 0">No plants added yet!</span>
 <add-plant-item *ngIf="showModifyPlantModal"
     [plant]="selectedPlant"
-    (closeBtnClicked)="toggleModifyPlantModal()"
+    (closeBtnClicked)="onCloseClicked()"
     (save)="onPlantSaved($event)">
 </add-plant-item>
