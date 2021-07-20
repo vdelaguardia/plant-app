@@ -5,10 +5,10 @@
         <div class="centered-container" id="uploader-content">
             <mat-icon id="florist-icon" *ngIf="!plant.pictureId">local_florist</mat-icon>
             <img *ngIf="!!plant.pictureId" #previewImg id="preview-img" [src]="plant.pictureId">
-            <mat-label for="file-picker">
+            <mat-label (click)="filePicker.click()" for="file-picker">
                 <span>Upload Picture</span>
-                <input type="file" id="file-picker" (change)="onFileChanged($event)">
             </mat-label>
+            <input #filePicker type="file" id="file-picker" (change)="onFileChanged($event)">
         </div>
         <div class="centered-container" id="edit-content">
             <form class="centered-container" id="form">
