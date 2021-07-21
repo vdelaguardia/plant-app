@@ -1,10 +1,9 @@
 <h1>HOME PAGE</h1>
 <div id="container">
     <div *ngFor="let plant of plants">
-        <img id="plant-pic" aria-placeholder="Plant Picture">
-        <span>Name: {{plant.name}}</span>
-        <span>Water Every {{plant.daysBtwnWatering}}</span>
-        <span>Last Watered: {{plant.lastWateredDate | date: 'shortDate'}} Days</span>
-        <button (click)="onPlantWatered(plant)">Watered</button>
+        <simple-profile [plant]="plant"></simple-profile>
+        <div class="water-btn">
+            <button (click)="onPlantWatered(plant)">Watered</button>
+        </div>
     </div>
 </div>

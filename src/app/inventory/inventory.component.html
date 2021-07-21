@@ -1,8 +1,10 @@
-<h1>YOUR PLANTS</h1>
-<button id="add-plant-btn" (click)="toggleModifyPlantModal()">+</button>
-<div id="plants-container">
-    <div id="plants-box">
-        <app-plant-item *ngFor="let plant of plants" [plant]="plant" (editClicked)="onEditClicked($event)" (deleteClicked)="onDeleteClicked($event)"></app-plant-item>
+<div>
+    <h1>YOUR PLANTS</h1>
+    <button id="add-plant-btn" (click)="toggleModifyPlantModal()">+</button>
+    <div id="plants-container">
+        <div id="plants-box">
+            <app-plant-item *ngFor="let plant of plants" [plant]="plant" (editClicked)="onEditClicked($event)" (deleteClicked)="onDeleteClicked($event)"></app-plant-item>
+        </div>
     </div>
 </div>
 <span *ngIf="plants.length === 0">No plants added yet!</span>

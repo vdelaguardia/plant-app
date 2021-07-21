@@ -1,7 +1,7 @@
 <div id="container">
     <simple-profile [plant]="plant"></simple-profile>
     <div id="info-container">
-        <span>Water Every {{plant.daysBtwnWatering}} Days</span>
+        <span>Water Every: {{plant.daysBtwnWatering}}<span *ngIf="plant.daysBtwnWatering>1">Days</span><span *ngIf="plant.daysBtwnWatering==1">Day</span></span>
         <span>Last Watered: {{plant.lastWateredDate | date: 'shortDate'}} Days</span>
         <div>
             <button mat-raised-button color="warn" (click)="onDeleteClicked()">Delete</button>
