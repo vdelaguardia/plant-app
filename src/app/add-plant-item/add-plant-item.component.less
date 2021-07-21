@@ -9,25 +9,41 @@
 }
 
 #content {
-    width: 500px;
-
     left: 0;
     right: 0;
 
     margin-left: auto;
     margin-right: auto;
+
+    div {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
 
 #edit-content {
     display: flex;
     flex-direction: column;
-    height: 300px;
-    width: 80%;
+    height: min-content;
+    width: 15%;
     
+    margin: 40px;
     align-items: center;
     justify-content: center;
 
     border-radius: 25px;
+
+    form {
+        flex-direction: column;
+
+        mat-form-field {
+            max-width: 180px;
+        }
+    }
+}
+
+#buttons {
+    flex-direction: column;
 }
 
 #display {
@@ -38,23 +54,24 @@
 #preview-img {
     width: 200px;
     height: 200px;
-    background-color: rgb(150,200,150);
+    background-color: #b5e48c;
     border-radius: 50px;
     border: 2px solid rgb(10, 50, 10);
 }
 
 #inner-container {
     position: fixed;
-    margin-left: auto;
-    margin-right: auto;
-    top: 35%;
+    margin: auto;
+    top: 0;
     left: 0;
     right: 0;
-
-    width: 60%;
+    bottom: 0;
+    width: 30%;
+    height: min-content;
 
     border-radius: 50px;
-    background-color: rgb(220,220,220);
+    background-color: #99d98c;
+    border: solid 3px #184E77;
 }
 
 #uploader-content {
@@ -63,8 +80,62 @@
     align-items: center;
 
     padding: 10px;
+
+    mat-label {
+        background-color: #168aad;
+        margin-top: 10px;
+        padding: 5px;
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        cursor: pointer;
+
+        span {
+            font-weight: 500;
+        }
+    }
 }
 
-.flex-container {
+.centered-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#file-picker {
+    display: none;
+}
+
+
+#florist-icon {
+    height: 204px;
+    width: 204px;
+    font-size: 204px;
+    border: solid 2px black;
+    border-radius: 50px;
+}
+
+@media( max-width: 400px ) {
+
+    #inner-container {
+        width: 90%;
+        height: 53%;
+    }
+
+    #content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #edit-content {
+        margin: 0px 40px 0px 40px;
+    }
+
+    #form {
+        flex-direction: column;
+    }
+
+    mat-form-field {
+        max-width: 180px;
+    }
 }

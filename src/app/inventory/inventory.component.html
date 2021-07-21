@@ -6,10 +6,10 @@
             <app-plant-item *ngFor="let plant of plants" [plant]="plant" (editClicked)="onEditClicked($event)" (deleteClicked)="onDeleteClicked($event)"></app-plant-item>
         </div>
     </div>
-    <span *ngIf="plants.length === 0">No plants added yet!</span>
-    <add-plant-item *ngIf="showModifyPlantModal"
-        [plant]="selectedPlant"
-        (closeBtnClicked)="toggleModifyPlantModal()"
-        (save)="onPlantSaved($event)">
-    </add-plant-item>
 </div>
+<span *ngIf="plants.length === 0">No plants added yet!</span>
+<add-plant-item *ngIf="showModifyPlantModal"
+    [plant]="selectedPlant"
+    (closeBtnClicked)="onCloseClicked()"
+    (save)="onPlantSaved($event)">
+</add-plant-item>
