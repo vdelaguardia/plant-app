@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Plant } from '../models/plant.model';
 
 import { SimpleProfileComponent } from './simple-profile.component';
 
@@ -16,6 +17,7 @@ describe('SimpleProfileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SimpleProfileComponent);
     component = fixture.componentInstance;
+    component.plant = plant;
     fixture.detectChanges();
   });
 
@@ -23,3 +25,11 @@ describe('SimpleProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+const plant: Plant = {
+  plantId: 0,
+  pictureId: "",
+  name: "plant",
+  lastWateredDate: new Date().toDateString(),
+  daysBtwnWatering: 1
+};

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DexieService } from '../core/dexie.service';
+import { PlantService } from '../services/plant.service';
 
 import { InventoryComponent } from './inventory.component';
 
@@ -8,7 +10,8 @@ describe('InventoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InventoryComponent ]
+      declarations: [ InventoryComponent ],
+      providers: [ PlantService, DexieService ]
     })
     .compileComponents();
   });
